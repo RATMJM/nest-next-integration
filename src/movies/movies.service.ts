@@ -1,10 +1,10 @@
 //https://www.prisma.io/docs/concepts/components/prisma-client/crud#read CRUDD exmaples
 
-import { Injectable, NotFoundException, OnModuleInit } from "@nestjs/common";
-import { Movie } from "./entities/movie.entity";
-import { CreateMovieDto } from "./dto/create-movie.dto";
-import { UpdateMovieDto } from "./dto/update-movie.dto";
-import { PrismaClient, userinfo as UserInfo } from "@prisma/client";
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { Movie } from './entities/movie.entity';
+import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
+import { PrismaClient, userinfo as UserInfo } from '@prisma/client';
 @Injectable()
 export class MoviesService extends PrismaClient implements OnModuleInit {
   async onModuleInit() {
@@ -17,32 +17,32 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
 
   async getAllUserInfo(userId: number): Promise<UserInfo[]> {
     const options = {
-      host: process.env.MQTT_HOST, //device_log로 가 는듯?
+      host: process.env.MQTT_HOST, //device_log로 가 는듯??
       // host: 'test.mosquitto.org',
       port: process.env.MQTT_PORT,
-      protocol: "tcp",
+      protocol: 'tcp',
       connectTimeout: 4000,
-      clientId: "",
-      userName: "test",
-      qos: "2",
-      guid: "",
+      clientId: '',
+      userName: 'test',
+      qos: '2',
+      guid: '',
     };
 
-    const mqtt = require("mqtt");
+    const mqtt = require('mqtt');
     const client = mqtt.connect(options);
-    let topic = [""];
+    let topic = [''];
     // let message = { "msgType": "refreshContents", "payload": "orderNumChange" }
-    let message = { msgType: "changeBrightness", payload: "5" };
+    let message = { msgType: 'changeBrightness', payload: '5' };
 
     const encoder = new TextEncoder();
     const toBytes = (text) => {
       return encoder.encode(text);
     };
 
-    client.on("connect", function () {
+    client.on('connect', function () {
       client.subscribe(topic, function (err) {
         if (!err) {
-          console.log("mqtt-wrapper : connected! message: " + toBytes(message));
+          console.log('mqtt-wrapper : connected! message: ' + toBytes(message));
 
           // setInterval(() => client.publish(topic, JSON.stringify(message), 2, false), 5000);
 
@@ -54,13 +54,13 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
     //      message
 
     // let topic = 'test';
-    client.on("message", (topic, message) => {
-      console.log("topic: " + topic + " and messages: " + message.toString());
+    client.on('message', (topic, message) => {
+      console.log('topic: ' + topic + ' and messages: ' + message.toString());
       // console.log(message.toString());
       // client.end();
     });
 
-    client.on("error", (error) => {
+    client.on('error', (error) => {
       console.log("Can't connect" + error);
       // client.end();
       process.exit(1);
@@ -97,12 +97,12 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
     // superPrint([true, true, true]);
     // superPrint(["a", "b", "c"]);
 
-    const rina = playerMaker("jm");
-    rina.name = "welcome to  ";
+    const rina = playerMaker('jm');
+    rina.name = 'welcome to  ';
     rina.age = 11;
     // console.log('hit your face ' + userId);
-    let c: string[] = ["1", "2", "3"];
-    c.push("1");
+    let c: string[] = ['1', '2', '3'];
+    c.push('1');
     // console.log(c);
     // const test =  await this.userinfo.findMany();
     const test = await this.userinfo.findMany({
@@ -125,7 +125,7 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
   }
 
   async userContents(userId: number): Promise<UserInfo[]> {
-    console.log("get your contents mqtt" + userId);
+    console.log('get your contents mqtt' + userId);
 
     // const test =  await this.userinfo.findMany();
     const test = await this.userinfo.findMany({
@@ -135,32 +135,32 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
       include: {
         contents: {
           where: {
-            artworkYn: "N",
+            artworkYn: 'N',
           },
         },
       },
     });
-    console.log("test  :" + test);
+    console.log('test  :' + test);
     // console.log('yesar' + this.contents);
     // const userIhistd = this.users.find((userinfo) => userinfo.userId === userId);
     const options = {
       host: process.env.MQTT_HOST, //device_log로 가 는듯?
       // host: 'test.mosquitto.org',
       port: process.env.MQTT_PORT,
-      protocol: "tcp",
+      protocol: 'tcp',
       connectTimeout: 4000,
-      clientId: "*",
-      userName: "test",
-      guid: "",
+      clientId: '*',
+      userName: 'test',
+      guid: '',
     };
 
-    const mqtt = require("mqtt");
+    const mqtt = require('mqtt');
     const client = mqtt.connect(options);
-    let topic = ["*"];
+    let topic = ['*'];
     // let message = { "msgType": "refreshContents", "payload": "orderNumChange" }
-    let message = { msgType: "changeBrightness", payload: "5" };
+    let message = { msgType: 'changeBrightness', payload: '5' };
 
-    client.on("connect", function () {
+    client.on('connect', function () {
       // client.subscribe(topic, function (err) {
       //   if (!err) {
       //     console.log('mqtt-wrapper : connected!');
@@ -174,19 +174,19 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
         return encoder.encode(text);
       };
       console.log(
-        "pub : connected!  " +
+        'pub : connected!  ' +
           JSON.stringify(message) +
-          "  bytes :" +
-          toBytes(message)
+          '  bytes :' +
+          toBytes(message),
       );
       // setInterval(() => client.publish(topic, JSON.stringify(message), 2, fal se), 2000);
       client.publish(topic, toBytes(message), 2, false);
-      console.log("mqtt-published!");
+      console.log('mqtt-published!');
     });
     // client.getServerUrl();
     //      message
 
-    client.on("error", (error) => {
+    client.on('error', (error) => {
       console.log("Can't connect" + error);
       // client.end();
       process.exit(1);
@@ -205,7 +205,7 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
   }
 
   getOne(id: number): Movie {
-    console.log("아이디: " + typeof id);
+    console.log('아이디: ' + typeof id);
     const movie = this.movies.find((movie) => movie.id === id);
     if (!movie) {
       throw new NotFoundException(`Movie with ID ${id} Not FOund`);
@@ -243,9 +243,9 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
   }
 
   async updateUserInfo(userId: number): Promise<UserInfo[]> {
-    console.log("update your face " + userId);
-    let nickname = "Hi";
-    console.log("nickname :" + nickname);
+    console.log('update your face ' + userId);
+    let nickname = 'Hi';
+    console.log('nickname :' + nickname);
     // const test = await this.userinfo.findMany();
     const updateUser = await this.userinfo.update({
       where: {
@@ -255,7 +255,7 @@ export class MoviesService extends PrismaClient implements OnModuleInit {
         userName: nickname,
       },
     });
-    console.log("updateUser   :" + updateUser);
+    console.log('updateUser   :' + updateUser);
     // const userIhistd = this.users.find((userinfo) => userinfo.userId === userId);
     if (!this.userinfo) {
       throw new NotFoundException(`userinfo with userID ${userId} Not FOund`);
