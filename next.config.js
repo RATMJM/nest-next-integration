@@ -9,8 +9,13 @@ const nextConfig = {
         port: '',
         pathname: '/my-bucket/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'wwuokloxidnu676076.cdn.gov-ntruss.com',
+        port: '',
+      },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

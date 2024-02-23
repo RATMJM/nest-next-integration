@@ -4,6 +4,7 @@ exports.Main = void 0;
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 async function bootstrap() {
     console.log('started');
     const fs = require('fs');
@@ -17,7 +18,9 @@ async function bootstrap() {
             cert: fs.readFileSync(process.env.SSL_CERT_PATH),
         };
     }
-    console.log(fs.readFileSync(process.env.SSL_KEY_PATH) + '     ' + fs.readFileSync(process.env.SSL_CERT_PATH));
+    console.log(fs.readFileSync(process.env.SSL_KEY_PATH) +
+        '     ' +
+        fs.readFileSync(process.env.SSL_CERT_PATH));
     const app = await core_1.NestFactory.create(app_module_1.AppModule, { httpsOptions });
     app.enableShutdownHooks();
     app.useGlobalPipes(new common_1.ValidationPipe({
@@ -36,7 +39,7 @@ var Main;
     async function getApp() {
         if (!app) {
             app = await core_1.NestFactory.create(app_module_1.AppModule, { bodyParser: false });
-            app.setGlobalPrefix("api");
+            app.setGlobalPrefix('api');
             await app.init();
         }
         return app;
@@ -45,7 +48,7 @@ var Main;
     async function getListener() {
         const app = await getApp();
         const server = app.getHttpServer();
-        const [listener] = server.listeners("request");
+        const [listener] = server.listeners('request');
         return listener;
     }
     Main.getListener = getListener;

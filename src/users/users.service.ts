@@ -18,16 +18,17 @@ export class UsersService {
 
 
 
-    const users = [
-      { id: '1', name: 'test1' },
-      { id: 2, name: 'test2' },
-      { id: 3, name: 'test3' },
-      { id: 4, name: 'test4' },
-      { id: 5, name: 'test5' },
+    const galleryItems = [
+ 
+      { title: '별밤' , authorName: 'test1', type: '수채화' , year :'2050', imageUrl: 'https://wwuokloxidnu676076.cdn.gov-ntruss.com/75/2016/11/27/2016-11-27-12-25-3975_0_thumbNail.png'},
+      { title: '오니', authorName: 'test2', type:  '수묵', year :'2021',imageUrl: 'https://wwuokloxidnu676076.cdn.gov-ntruss.com/75/2016/11/27/2016-11-27-12-25-4775_0_thumbNail.png'},
+      { title: '파묘', authorName: 'test3', type: '부적', year :'1799',imageUrl: 'https://wwuokloxidnu676076.cdn.gov-ntruss.com/75/2016/11/27/2016-11-27-12-25-5675_0_thumbNail.png'},
+      { title: '후쿠오카', authorName: 'test4', type: '다이묘', year :'1871',imageUrl: 'https://wwuokloxidnu676076.cdn.gov-ntruss.com/75/2016/11/27/2016-11-27-12-26-1875_0_thumbNail.png'},
+      { title: '팜팜', authorName: 'test5', type: '포도', year :'1978',imageUrl: 'https://wwuokloxidnu676076.cdn.gov-ntruss.com/75/2016/11/27/2016-11-27-12-26-3875_0_thumbNail.png'},
 
     ];
-    console.log(users);
-    return users;
+    console.log(galleryItems);
+    return galleryItems;
   }
 
   findOne(id: number) {
